@@ -1,95 +1,91 @@
 'use strict'
 
+const openHour = 6;
+const closeHour = 20;
 const Seattle = {
   location: "Seattle",
   hourlyMin: 23,
   hourlyMax: 65,
   avgSale: 6.3,
-  openHour: 6,
-  closeHour: 19,
-  hourly: [],
-  hourlySales: function(hourlyMin, hourlyMax, avgSale, openHour, closeHour) {
-    
-
-    for (let i = open; i <= close; i++){
-      let total = Math.ceil((Math.random() * (max - min) + min) * avg);
-      this.hourly.push(i, total); 
+  sales: [],
+  getSales: function(open, close){
+    for (let i = open; i < close; i++) {
+      this.sales.push(hourlySales(this.hourlyMin,this.hourlyMax,this.avgSale));
     }
-  
+  }
+};
+// Seattle.getSales(openHour, closeHour);
+//Seattle.getDailyTotal();
+//Seattle.getDailyTotal(this.sales);
+
+console.log('this is Seattle', Seattle);
+
+const Tokyo = {
+  location: "Tokyo",
+  hourlyMin: 3,
+  hourlyMax: 24,
+  avgSale: 1.2,
+  sales:[],
+  getSales: function(open, close){
+    for (let i = open; i < close; i++) {
+      this.sales.push(hourlySales(this.hourlyMin,this.hourlyMax,this.avgSale));
+    }
+  }
+};
+
+const Dubai = {
+  location: "Dubai",
+  hourlyMin: 11,
+  hourlyMax: 38,
+  avgSale: 3.7,
+  sales:[],
+  getSales: function(open, close){
+    for (let i = open; i < close; i++) {
+      this.sales.push(hourlySales(this.hourlyMin,this.hourlyMax,this.avgSale));
+    }
+  }
+};
+
+const Paris = {
+  location: "Paris",
+  hourlyMin: 20,
+  hourlyMax: 38,
+  avgSale: 2.3,
+  sales:[],
+  getSales: function(open, close){
+    for (let i = open; i < close; i++) {
+      this.sales.push(hourlySales(this.hourlyMin,this.hourlyMax,this.avgSale));
+    }
+  }
+};
+
+const Lima = {
+  location: "Lima",
+  hourlyMin: 2,
+  hourlyMax: 16,
+  avgSale: 4.6,
+  sales:[],
+  getSales: function(open, close){
+    for (let i = open; i < close; i++) {
+      this.sales.push(hourlySales(this.hourlyMin,this.hourlyMax,this.avgSale));
+    }
   }
   
-  //hourlySales(this.hourlyMin, this.hourlyMax, this.avgSale, this.openHour, this.closeHour),
-  //dailySales: dailySales(this.hourlySales)
-}
-
-// const Tokyo = {
-//   location: "Tokyo",
-//   hourlyMin: 3,
-//   hourlyMax: 24,
-//   avgSale: 1.2,
-//   openHour: 6,
-//   closeHour: 19,
-//   hourlySales: hourlySales(this.hourlyMin, this.hourlyMax, this.avgSale, this.openHour, this.closeHour),
-//   dailySales: dailySales(this.hourlySales)
-// }
-
-// const Dubai = {
-//   location: "Dubai",
-//   hourlyMin: 11,
-//   hourlyMax: 38,
-//   avgSale: 3.7,
-//   openHour: 6,
-//   closeHour: 19,
-//   hourlySales: hourlySales(this.hourlyMin, this.hourlyMax, this.avgSale, this.openHour, this.closeHour),
-//   dailySales: dailySales(this.hourlySales)
-// }
-
-// const Paris = {
-//   location: "Paris",
-//   hourlyMin: 20,
-//   hourlyMax: 38,
-//   avgSale: 2.3,
-//   openHour: 6,
-//   closeHour: 19,
-//   hourlySales: hourlySales(this.hourlyMin, this.hourlyMax, this.avgSale, this.openHour, this.closeHour),
-//   dailySales: dailySales(this.hourlySales)
-// }
-
-// const Lima = {
-//   location: "Lima",
-//   hourlyMin: 2,
-//   hourlyMax: 16,
-//   avgSale: 4.6,
-//   openHour: 6,
-//   closeHour: 19,
-//   hourlySales: hourlySales(this.hourlyMin, this.hourlyMax, this.avgSale, this.openHour, this.closeHour),
-//   dailySales: dailySales(this.hourlySales)
-  
-// }
+};
 
 // function to calculate the number of cookies are sold hourly
-// function hourlySales(min, max, avg, open, close) {
-//   let output = [];
+function hourlySales(min, max, avg) {
+  let result = 0;
+  result = Math.ceil((Math.random() * (max - min) + min) * avg);
+  return result;
+}
 
-//     for (let i = open; i <= close; i++){
-//       let total = Math.ceil((Math.random() * (max - min) + min) * avg);
-//       output.push(i, total); 
-//     }
-//   return output;
-//   console.log(output);
-// }
 
-// function to record the total amount of cookies sold daily
 
-// function dailySales(array) {
-//   let total = 0;
-//   for (let i = 1; i < array.length; i+2){
-//     total = total + array[i];
-//   }
-//   return total;
-// }
 
-let cities = [Seattle]//, Tokyo, Dubai,  Paris, Lima];
+
+let cities = [Seattle, Tokyo, Dubai, Paris, Lima];
+
 
 const storeSecElem = document.getElementById('store');
 
@@ -120,25 +116,32 @@ function storeInput(city){
   divElem.appendChild(ulElem);
 
   // create li and attach to ul by using for loop
-  for (let i = 0; i < city.hourlySales.length; i+2){
+  let dailyTotal = 0;
+  for (let i = 0; i < city.sales.length; i++){
     const liElem = document.createElement('li');
-    if (city.hourlySales[i] < 12){
-      liElem.textContent = '${city.hourlySales[i]}am: ${city.hourlySales[i+1]} cookies'
-    } else if (city.hourlySales[i] = 12){
-      liElem.textContent = '${city.hourlySales[i]}pm: ${city.hourlySales[i+1]} cookies'
-    } else if (city.hourlySales[i] > 12){
-      liElem.textContent = '${city.hourlySales[i] - 12}pm: ${city.hourlySales[i+1]} cookies'
+    dailyTotal = dailyTotal + city.sales[i];
+    if (i < (12 - openHour)){
+      liElem.textContent = `${(openHour + i)}am: ${city.sales[i]} cookies`;
+    } else if (i === (12 - openHour)){
+      liElem.textContent = `${(openHour + i)}pm: ${city.sales[i]} cookies`;
+    } else if (i > (12 - openHour)){
+      liElem.textContent = `${(openHour + i - 12)}pm: ${city.sales[i]} cookies`;
     }
     ulElem.appendChild(liElem);
   }
 
+  // create the last li that has the daily total sales
+  
+  const liElem = document.createElement('li');
+  liElem.textContent = `Total: ${dailyTotal} coolies`;
+  ulElem.appendChild(liElem);
+
+
 
 }
 
-for (let i =0; i < cities; i++){
-  let currentCity = cities[0];
-  currentCity.hourlySales();
+for (let i =0; i < cities.length; i++){
+  let currentCity = cities[i];
+  currentCity.getSales(openHour, closeHour);
   storeInput(currentCity);
 }
-
-console.log(Seattle);
