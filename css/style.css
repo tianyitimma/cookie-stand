@@ -1,0 +1,125 @@
+
+
+h1 {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 3em;
+}
+
+h2 {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 2em;
+}
+
+h3{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.5em;
+}
+
+p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1em;
+}
+
+
+header {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: darkgray;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  
+}
+
+header img{
+  height: 80%;
+}
+
+header h1{
+  padding-right: 20px;
+}
+
+main {
+  
+}
+
+section {
+  width: 100%;
+  padding-left: 10px;
+  margin-bottom: 20px;
+}
+#firstRow {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#firstRow article {
+  background-color: gray;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+#secondRow, #thirdRow{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+
+}
+
+div{
+  width: 45%;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+}
+div article{
+  background-color: gray;
+}
+
+#fourthRow {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#fourthRow article {
+  background-color: gray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+#fourthRow article h3{
+  padding-bottom: 20px;
+}
+
+nav{
+ 
+  
+}
+
+
+
+footer {
+  width: 100%;
+  height: 40px;
+  background-color: darkgray;
+}
+
+footer p {
+  padding-top: 10px;
+  padding-left: 20px;
+}
