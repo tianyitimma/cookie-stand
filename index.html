@@ -64,17 +64,50 @@
       </section>
 
       <section id="fourthRow">
-        <img src="./image/salmon.png">
-        <article>
-          <h2>Contact Us</h2>
-          <p>
-           pats@salmoncookie.org <br />
-           (206)568-3474 (lov-fish)
-          </p>
-          <nav>
-            <a href="./sales.html">Daily Sales</a>
-          </nav>
-        </article>
+        <div id="fourthRowDiv">
+          <img src="./image/salmon.png">
+          <article>
+            <h2>Contact Us</h2>
+            <p>
+            pats@salmoncookie.org <br />
+            (206)568-3474 (lov-fish)
+            </p>
+            <nav>
+              <a href="./sales.html">Daily Sales</a>
+            </nav>
+          </article>
+        </div>
+
+        <div id="fourthRowForm">
+          <h2>Store Update</h2>
+          <form id="storeForm" >
+            <fieldset>
+              <legend>Store Input</legend>
+              <label> Location
+                <input name="location" type="text" >
+                <br />
+              </label>
+
+              <label>Minimum Customer per Hour
+                <input name="hourlyMin" type="number">
+                <br />
+              </label>
+
+              <label>Maximum Customer per Hour
+                <input name="hourlyMax" type="number">
+                <br />
+              </label>
+
+              <label>Average Sales per Customer
+                <input name="avgSale" type="number" step=".1">
+                <br />
+              </label>
+
+          </fieldset>
+          <button>submit</button>
+          </form>
+        </div>
+
       </section>
     </main>
     <footer>

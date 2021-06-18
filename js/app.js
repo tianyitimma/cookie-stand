@@ -47,6 +47,8 @@ const Lima = new City('Lima', 2, 16, 4.6);
 // attach to the HTML section
 const storeSecElem = document.getElementById('store');
 
+const formInputElem = document.getElementById('storeForm');
+
 // <!-- <table>
 // <tr id="hours">
 //   <th></th>
@@ -87,9 +89,7 @@ function renderHeaderElem(){
     }
   }
 }
-// call the function
 
-renderHeaderElem();
 
 // the body part
 City.prototype.renderStore = function(){
@@ -126,9 +126,23 @@ function renderAllStores(){
   }
 }
 
-// call the render all function
+// handler function to add update new store
 
-renderAllStores();
+function storeUpdate(event){
+  event.preventDefault();
+  let location = event.target.location.value;
+  let hourlyMin = event.target.hourlyMin.value;
+  let hourlyMax = event.target.hourlyMax.value;
+  let avgSale = event.target.avgSale.value;
+
+  const newCity = new City(location, hourlyMin, hourlyMax, avgSale);
+  newCity.getSales(openHour, closeHour);
+  newCity.renderStore();
+  event.target.reset();
+  console.log('new city is ', newCity);
+}
+
+
 
 //console.log(City.prototype.cities[0].sales.length);
 // the footer
@@ -157,5 +171,16 @@ function renderFooter(){
   tableFooter.appendChild(footerColLast);
 }
 
-renderFooter();
 
+
+// call the function
+
+renderHeaderElem();
+
+formInputElem.addEventListener('submit',storeUpdate);
+
+// call the render all function
+
+renderAllStores();
+
+renderFooter();
