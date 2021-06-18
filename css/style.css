@@ -89,11 +89,17 @@ div article{
 #fourthRow {
   width: 100%;
   display: flex;
+  justify-content: space-evenly;
+}
+
+#fourthRowDiv {
+  width: 70%;
+  display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-#fourthRow article {
+#fourthRowDiv article {
   background-color: gray;
   display: flex;
   flex-direction: column;
@@ -102,15 +108,30 @@ div article{
   text-align: center;
 }
 
-#fourthRow article h3{
+#fourthRowDiv article h3{
   padding-bottom: 20px;
 }
 
-nav{
- 
+#fourthRowForm {
+  width: 25%;
   
 }
 
+form {
+  text-align: left;
+}
+
+fieldset{ 
+  border: 5px dashed orange;
+  padding: 5px;
+  margin-bottom: 10px;
+
+}
+
+legend{
+  font-size: 1.2em;
+  font-weight: bold;
+}
 
 
 footer {
