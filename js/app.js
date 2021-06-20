@@ -37,13 +37,6 @@ const Dubai = new City('Dubai', 11, 38, 3.7);
 const Paris = new City('Paris', 20, 38, 2.3);
 const Lima = new City('Lima', 2, 16, 4.6);
 
-
-// console.log(Seattle);
-// console.log(Tokyo);
-// console.log(Dubai);
-// console.log(Paris);
-// console.log(Lima);
-
 // attach to the HTML section
 const storeSecElem = document.getElementById('store');
 
@@ -61,9 +54,10 @@ const formInputElem = document.getElementById('storeForm');
 // </tr>
 // </table> -->
 
-const table= document.createElement('table');
+//const table= document.getElementById('table');
+const table = document.createElement('table');
 storeSecElem.appendChild(table);
-const tableHeader = document.createElement('tr');
+const tableHeader = document.createElement('thead');
 table.appendChild(tableHeader);
 
 
@@ -98,8 +92,6 @@ City.prototype.renderStore = function(){
   const rowCol1 = document.createElement('td');
   rowCol1.textContent = this.location;
   row.appendChild(rowCol1);
-  //let rowCol = [];
-  // for loop to put the hourly sales
   let dailyTotal = 0;
   for (let i = 0; i < this.sales.length; i++){
     const rowCol = document.createElement('td');
@@ -112,8 +104,6 @@ City.prototype.renderStore = function(){
   row.appendChild(rowColLast);
 
 };
-
-
 
 // global function
 // render all the locations
@@ -131,27 +121,59 @@ function renderAllStores(){
 function storeUpdate(event){
   event.preventDefault();
   let location = event.target.location.value;
-  let hourlyMin = event.target.hourlyMin.value;
-  let hourlyMax = event.target.hourlyMax.value;
-  let avgSale = event.target.avgSale.value;
+  let hourlyMin = parseFloat(event.target.hourlyMin.value);
+  let hourlyMax = parseFloat(event.target.hourlyMax.value);
+  let avgSale = parseFloat(event.target.avgSale.value);
 
   const newCity = new City(location, hourlyMin, hourlyMax, avgSale);
   newCity.getSales(openHour, closeHour);
   newCity.renderStore();
-  event.target.reset();
+  
   console.log('new city is ', newCity);
+  
+  updateFooter();
+  event.target.reset();
+
 }
-
-
-
-//console.log(City.prototype.cities[0].sales.length);
-// the footer
+// creating the footer row
 function renderFooter(){
-  const tableFooter = document.createElement('tfoot');
+  const tableFooter = document.createElement('tfoot')
+  tableFooter.setAttribute("id", "tFoot");
   table.appendChild(tableFooter);
   const footerCol1 = document.createElement('td');
   footerCol1.textContent = 'Total';
   tableFooter.appendChild(footerCol1);
+  
+  let overAllTotal = 0;
+  // hourly total accross all the locations
+  for(let i = 0; i < (closeHour - openHour); i++){
+    const footerCol = document.createElement('td');
+    //footerCol.setAttribute("id", `${i}`)
+    let hourlyTotal = 0;
+    for (let j = 0; j < City.prototype.cities.length; j++){
+      hourlyTotal = hourlyTotal + City.prototype.cities[j].sales[i];
+    }
+    footerCol.textContent = hourlyTotal;
+    tableFooter.appendChild(footerCol);
+    overAllTotal = overAllTotal + hourlyTotal;
+  }
+
+  // overall total
+  const footerColLast = document.createElement('td');
+  //footerColLast.setAttribute("id", "overAllTotal");
+  footerColLast.textContent = overAllTotal;
+  tableFooter.appendChild(footerColLast);
+}
+
+//update total values after adding new stores
+function updateFooter(){
+  let tableFooter = document.getElementById('tFoot');
+  tableFooter.innerHTML = "";
+  
+  const footerCol1 = document.createElement('td');
+  footerCol1.textContent = 'Total';
+  tableFooter.appendChild(footerCol1);
+  
   let overAllTotal = 0;
   // hourly total accross all the locations
   for(let i = 0; i < (closeHour - openHour); i++){
@@ -169,18 +191,18 @@ function renderFooter(){
   const footerColLast = document.createElement('td');
   footerColLast.textContent = overAllTotal;
   tableFooter.appendChild(footerColLast);
+  
 }
-
-
 
 // call the function
 
 renderHeaderElem();
-
-formInputElem.addEventListener('submit',storeUpdate);
 
 // call the render all function
 
 renderAllStores();
 
 renderFooter();
+
+// the lisener function
+formInputElem.addEventListener('submit',storeUpdate);
